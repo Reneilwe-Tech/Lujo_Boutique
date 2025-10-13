@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Lujo\'s boutique (1)</string>
+
+    <string name="title_new_listing">New Product Listing</string>
+    <string name="label_product_name">Product Name</string>
+    <string name="label_product_description">Product Description</string>
+    <string name="label_product_price">Product Price</string>
+    <string name="button_upload_image">Upload Product Image</string>
+    <string name="button_save_listing">Save Listing</string>
+
+    <string name="dont_have_account">Don\'t have an account? <b>Sign Up</b></string>
+
+</resources>
