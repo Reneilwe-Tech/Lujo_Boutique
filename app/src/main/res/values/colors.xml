@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="charcoal">#0A0908</color>
+    <color name="oliveBrown">#5E503F</color>
+    <color name="offWhite">#F2F4F3</color>
+    <color name="blue_gren">#22333B</color>
+    <color name="muteBeige">#A9927D</color>
+    <color name="_5e503f">#5E503F</color>
+
+</resources>

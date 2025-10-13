@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/offWhite"
+    android:orientation="vertical"
+    android:paddingVertical="32dp"
+    android:paddingHorizontal="65dp"
+    tools:context=".CreateAccountActivity">
+
+    <TextView
+        android:layout_width="261dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="32dp"
+        android:text="@string/create"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginVertical="10dp"
+        android:text="@string/email"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="normal" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="277sp"
+        android:layout_height="27dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/text_bg"
+        android:inputType="textPassword"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/name"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:textStyle="normal" />
+
+    <EditText
+        android:id="@+id/editTextFullName"
+        android:layout_width="match_parent"
+        android:layout_height="27dp"
+        android:layout_marginBottom="16sp"
+        android:background="@drawable/text_bg"
+        android:inputType="textPersonName"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/pass"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="normal" />
+
+    <EditText
+        android:id="@+id/editPassword"
+        android:layout_width="match_parent"
+        android:layout_height="27dp"
+        android:layout_marginBottom="16sp"
+        android:background="@drawable/text_bg"
+        android:inputType="textPassword"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/btnSignUp"
+        android:layout_width="277sp"
+        android:layout_height="51dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_bg"
+        android:elevation="5dp"
+        android:text="Sign Up"
+        android:textColor="@color/white"
+        android:textSize="18dp" />
+
+    <CheckBox
+        android:id="@+id/notifications"
+        android:layout_width="280dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:text="@string/notifications"
+        android:textColor="@color/charcoal"
+        android:textSize="12sp"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginVertical="25dp"
+        android:text="OR"
+        android:textColor="@color/charcoal" />
+
+    <Button
+        android:id="@+id/btnGoogleSignUp"
+        android:layout_width="277sp"
+        android:layout_height="51dp"
+        android:layout_gravity="center"
+        android:background="@drawable/button_bg"
+        android:padding="12dp"
+        android:text="@string/Google"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tvLoginLink"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:text="@string/login"
+        android:textColor="@color/charcoal" />
+
+</LinearLayout>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Lujo Botique</string>
+    <string name="welcome_btn">Get Started</string>
+    <string name="email">Email or Phone No.</string>
+    <string name="name">Full Name</string>
+    <string name="pass">Password</string>
+    <string name="login">Already have an account?Login</string>
+    <string name="Google">Continue with Google</string>
+    <string name="create">Create Account</string>
+    <string name="notifications">Get notified when there is new promotions</string>
+    <string name="signup">Dont have an account yet? Sign Up</string>
+</resources>
