@@ -19,6 +19,7 @@ public class HomeOverviewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_home_overview);
 
         // 1. Initialize UI components
@@ -31,8 +32,10 @@ public class HomeOverviewActivity extends AppCompatActivity {
         // 3. Setup Bottom Navigation Listener
         setupBottomNavigationView();
 
-        // Note: You would typically add click listeners for the category buttons
-        // and the top row icons (chat, favorite, notifications) here.
+
+
+
+
     }
 
     private void setupSearchView() {
@@ -48,14 +51,17 @@ public class HomeOverviewActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                // Optional: Handle live text changes (e.g., filter suggestions)
+
                 return false;
             }
         });
     }
 
     private void setupBottomNavigationView() {
-        // Set the default selection
+
+
+
+
         bottomNavigationView.setSelectedItemId(R.id.nav_home);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -63,10 +69,11 @@ public class HomeOverviewActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
 
+
                 if (itemId == R.id.nav_home) {
                     Toast.makeText(HomeOverviewActivity.this, "Home selected", Toast.LENGTH_SHORT).show();
                     return true;
-                } else if (itemId == R.id.nav_search) { // Corrected ID reference
+                } else if (itemId == R.id.nav_discover) {
                     Toast.makeText(HomeOverviewActivity.this, "Discover selected", Toast.LENGTH_SHORT).show();
                     // Intent discoverIntent = new Intent(HomeOverviewActivity.this, DiscoverActivity.class);
                     // startActivity(discoverIntent);

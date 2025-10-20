@@ -28,13 +28,13 @@ import okhttp3.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText editTextLoginEmail, editTextLoginPassword;
+    private EditText editTextEmailOrPhone, editTextPassword;
     private CheckBox checkBoxRememberMe;
     private Button btnLogin;
     private ImageButton btnGoogleSignIn;
     private TextView tvForgotPassword, tvSignUpLink;
 
-    // Replace with your actual API endpoint
+    //  API endpoint
     private static final String LOGIN_URL = "https://your-api-domain.com/api/login";
     private OkHttpClient client;
     private SharedPreferences sharedPreferences;
@@ -44,62 +44,31 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Initialize OkHttpClient
         client = new OkHttpClient();
-
-        // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("LujosBoutiquePrefs", MODE_PRIVATE);
 
-        // Initialize views - matching XML IDs
-        editTextLoginEmail = findViewById(R.id.editTextLoginEmail);
-        editTextLoginPassword = findViewById(R.id.editTextLoginPassword);
+        // IDs defined in XML
+        editTextEmailOrPhone = findViewById(R.id.editTextPassword);
+        editTextPassword = findViewById(R.id.editPassword);
         checkBoxRememberMe = findViewById(R.id.checkBoxRememberMe);
         btnLogin = findViewById(R.id.btnLogin);
         btnGoogleSignIn = findViewById(R.id.btnGoogleSignIn);
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
         tvSignUpLink = findViewById(R.id.tvSignUpLink);
 
-        // Load saved credentials if "Remember me" was checked
         loadSavedCredentials();
 
-        // Set click listener for login button
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                handleLogin();
-            }
-        });
+        btnLogin.setOnClickListener(v -> handleLogin());
 
-        // Set click listener for Google Sign In button
-        btnGoogleSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(LoginActivity.this,
-                        "Google Sign In coming soon!",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+        btnGoogleSignIn.setOnClickListener(v ->
+                Toast.makeText(LoginActivity.this, "Google Sign In coming soon!", Toast.LENGTH_SHORT).show());
 
-        // Set click listener for Forgot Password
-        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(LoginActivity.this,
-                        "Password reset coming soon!",
-                        Toast.LENGTH_SHORT).show();
-                // You can create a ForgotPasswordActivity later
-                // Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
-                // startActivity(intent);
-            }
-        });
+        tvForgotPassword.setOnClickListener(v ->
+                Toast.makeText(LoginActivity.this, "Password reset coming soon!", Toast.LENGTH_SHORT).show());
 
-        // Set click listener for Sign Up link
-        tvSignUpLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
-                startActivity(intent);
-            }
+        tvSignUpLink.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -108,51 +77,41 @@ public class LoginActivity extends AppCompatActivity {
         if (rememberMe) {
             String savedEmail = sharedPreferences.getString("email", "");
             String savedPassword = sharedPreferences.getString("password", "");
-            editTextLoginEmail.setText(savedEmail);
-            editTextLoginPassword.setText(savedPassword);
+            editTextEmailOrPhone.setText(savedEmail);
+            editTextPassword.setText(savedPassword);
             checkBoxRememberMe.setChecked(true);
         }
     }
 
     private void handleLogin() {
-        // Get input values
-        String email = editTextLoginEmail.getText().toString().trim();
-        String password = editTextLoginPassword.getText().toString().trim();
+        String emailOrPhone = editTextEmailOrPhone.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
 
-        // Validate inputs
-        if (email.isEmpty()) {
-            editTextLoginEmail.setError("Email or phone is required");
-            editTextLoginEmail.requestFocus();
-            return;
-        }
-
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextLoginEmail.setError("Please enter a valid email");
-            editTextLoginEmail.requestFocus();
+        if (emailOrPhone.isEmpty()) {
+            editTextEmailOrPhone.setError("Email or phone is required");
+            editTextEmailOrPhone.requestFocus();
             return;
         }
 
         if (password.isEmpty()) {
-            editTextLoginPassword.setError("Password is required");
-            editTextLoginPassword.requestFocus();
+            editTextPassword.setError("Password is required");
+            editTextPassword.requestFocus();
             return;
         }
 
         if (password.length() < 6) {
-            editTextLoginPassword.setError("Password must be at least 6 characters");
-            editTextLoginPassword.requestFocus();
+            editTextPassword.setError("Password must be at least 6 characters");
+            editTextPassword.requestFocus();
             return;
         }
 
-        // Save credentials if "Remember me" is checked
         if (checkBoxRememberMe.isChecked()) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("rememberMe", true);
-            editor.putString("email", email);
+            editor.putString("email", emailOrPhone);
             editor.putString("password", password);
             editor.apply();
         } else {
-            // Clear saved credentials if unchecked
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("rememberMe", false);
             editor.remove("email");
@@ -160,18 +119,15 @@ public class LoginActivity extends AppCompatActivity {
             editor.apply();
         }
 
-        // Call the API
-        loginUser(email, password);
+        loginUser(emailOrPhone, password);
     }
 
-    private void loginUser(String email, String password) {
-        // Disable button to prevent multiple clicks
+    private void loginUser(String emailOrPhone, String password) {
         btnLogin.setEnabled(false);
 
-        // Create JSON request body
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.put("email", email);
+            jsonBody.put("email", emailOrPhone);
             jsonBody.put("password", password);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -179,7 +135,6 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // Create request
         MediaType JSON = MediaType.get("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(jsonBody.toString(), JSON);
 
@@ -188,18 +143,14 @@ public class LoginActivity extends AppCompatActivity {
                 .post(body)
                 .build();
 
-        // Make API call
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        btnLogin.setEnabled(true);
-                        Toast.makeText(LoginActivity.this,
-                                "Network error: " + e.getMessage(),
-                                Toast.LENGTH_LONG).show();
-                    }
+                runOnUiThread(() -> {
+                    btnLogin.setEnabled(true);
+                    Toast.makeText(LoginActivity.this,
+                            "Network error: " + e.getMessage(),
+                            Toast.LENGTH_LONG).show();
                 });
             }
 
@@ -208,54 +159,49 @@ public class LoginActivity extends AppCompatActivity {
                 final String responseBody = response.body().string();
                 final boolean isSuccessful = response.isSuccessful();
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        btnLogin.setEnabled(true);
+                runOnUiThread(() -> {
+                    btnLogin.setEnabled(true);
 
-                        if (isSuccessful) {
-                            try {
-                                JSONObject jsonResponse = new JSONObject(responseBody);
+                    if (isSuccessful) {
+                        try {
+                            JSONObject jsonResponse = new JSONObject(responseBody);
 
-                                // Save authentication token
-                                String token = jsonResponse.optString("token", "");
-                                String userId = jsonResponse.optString("userId", "");
-                                String userName = jsonResponse.optString("name", "");
+                            String token = jsonResponse.optString("token", "");
+                            String userId = jsonResponse.optString("userId", "");
+                            String userName = jsonResponse.optString("name", "");
 
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("authToken", token);
-                                editor.putString("userId", userId);
-                                editor.putString("userName", userName);
-                                editor.putBoolean("isLoggedIn", true);
-                                editor.apply();
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("authToken", token);
+                            editor.putString("userId", userId);
+                            editor.putString("userName", userName);
+                            editor.putBoolean("isLoggedIn", true);
+                            editor.apply();
 
-                                Toast.makeText(LoginActivity.this,
-                                        "Login successful!",
-                                        Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,
+                                    "Login successful!",
+                                    Toast.LENGTH_SHORT).show();
 
-                                // Navigate to HomeOverview activity
-                                Intent intent = new Intent(LoginActivity.this, activity_home_overview.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
-                                finish();
+                            Intent intent = new Intent(LoginActivity.this, activity_home_overview.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
 
-                            } catch (JSONException e) {
-                                Toast.makeText(LoginActivity.this,
-                                        "Error parsing response",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            try {
-                                JSONObject errorJson = new JSONObject(responseBody);
-                                String errorMessage = errorJson.optString("message", "Login failed");
-                                Toast.makeText(LoginActivity.this,
-                                        errorMessage,
-                                        Toast.LENGTH_LONG).show();
-                            } catch (JSONException e) {
-                                Toast.makeText(LoginActivity.this,
-                                        "Invalid email or password. Please try again.",
-                                        Toast.LENGTH_LONG).show();
-                            }
+                        } catch (JSONException e) {
+                            Toast.makeText(LoginActivity.this,
+                                    "Error parsing response",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        try {
+                            JSONObject errorJson = new JSONObject(responseBody);
+                            String errorMessage = errorJson.optString("message", "Login failed");
+                            Toast.makeText(LoginActivity.this,
+                                    errorMessage,
+                                    Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            Toast.makeText(LoginActivity.this,
+                                    "Invalid email or password. Please try again.",
+                                    Toast.LENGTH_LONG).show();
                         }
                     }
                 });

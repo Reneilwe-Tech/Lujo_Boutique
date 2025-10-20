@@ -26,7 +26,7 @@ import okhttp3.Response;
 public class CreateAccountActivity extends AppCompatActivity {
 
     private TextView tvLoginLink;
-    private EditText editTextFullName, editTextEmailOrPhone, editTextPassword;
+    private EditText editTextFullName, editTextPassword, editTextEmailOrPhone;
     private Button btnSignUp, btnGoogleSignUp;
 
     // Replace with your actual API endpoint
@@ -41,15 +41,15 @@ public class CreateAccountActivity extends AppCompatActivity {
         // Initialize OkHttpClient
         client = new OkHttpClient();
 
-        // Initialize views - matching XML IDs
+        // Initialize views using IDs from your XML
         tvLoginLink = findViewById(R.id.tvLoginLink);
         editTextFullName = findViewById(R.id.editTextFullName);
-        editTextEmailOrPhone = findViewById(R.id.editTextEmailOrPhone);
-        editTextPassword = findViewById(R.id.editTextPassword);
+        editTextPassword = findViewById(R.id.editPassword);
+        editTextEmailOrPhone = findViewById(R.id.editTextPassword);
         btnSignUp = findViewById(R.id.btnSignUp);
         btnGoogleSignUp = findViewById(R.id.btnGoogleSignUp);
 
-        // Set click listener for login link
+        // Navigate to login activity
         tvLoginLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +59,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             }
         });
 
-        // Set click listener for sign up button
+        // Handle sign-up button click
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,13 +67,11 @@ public class CreateAccountActivity extends AppCompatActivity {
             }
         });
 
-        // Set click listener for Google sign up (optional)
+        // Handle Google sign-up click
         btnGoogleSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(CreateAccountActivity.this,
-                        "Google Sign Up coming soon!",
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateAccountActivity.this, "Google Sign Up coming soon!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -120,10 +118,8 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     private void signUpUser(String name, String email, String password) {
-        // Disable button to prevent multiple clicks
         btnSignUp.setEnabled(false);
 
-        // Create JSON request body
         JSONObject jsonBody = new JSONObject();
         try {
             jsonBody.put("name", name);
@@ -135,7 +131,6 @@ public class CreateAccountActivity extends AppCompatActivity {
             return;
         }
 
-        // Create request
         MediaType JSON = MediaType.get("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(jsonBody.toString(), JSON);
 
@@ -144,7 +139,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                 .post(body)
                 .build();
 
-        // Make API call
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -170,39 +164,16 @@ public class CreateAccountActivity extends AppCompatActivity {
                         btnSignUp.setEnabled(true);
 
                         if (isSuccessful) {
-                            try {
-                                JSONObject jsonResponse = new JSONObject(responseBody);
-
-                                // Save user data if needed (token, user info, etc.)
-                                // SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-                                // prefs.edit().putString("token", jsonResponse.getString("token")).apply();
-
-                                Toast.makeText(CreateAccountActivity.this,
-                                        "Account created successfully!",
-                                        Toast.LENGTH_SHORT).show();
-
-                                // Navigate to login
-                                Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
-                                startActivity(intent);
-                                finish();
-
-                            } catch (JSONException e) {
-                                Toast.makeText(CreateAccountActivity.this,
-                                        "Error parsing response",
-                                        Toast.LENGTH_SHORT).show();
-                            }
+                            Toast.makeText(CreateAccountActivity.this,
+                                    "Account created successfully!",
+                                    Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                            finish();
                         } else {
-                            try {
-                                JSONObject errorJson = new JSONObject(responseBody);
-                                String errorMessage = errorJson.optString("message", "Sign up failed");
-                                Toast.makeText(CreateAccountActivity.this,
-                                        errorMessage,
-                                        Toast.LENGTH_LONG).show();
-                            } catch (JSONException e) {
-                                Toast.makeText(CreateAccountActivity.this,
-                                        "Sign up failed. Please try again.",
-                                        Toast.LENGTH_LONG).show();
-                            }
+                            Toast.makeText(CreateAccountActivity.this,
+                                    "Sign up failed. Please try again.",
+                                    Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -210,5 +181,3 @@ public class CreateAccountActivity extends AppCompatActivity {
         });
     }
 }
-
-

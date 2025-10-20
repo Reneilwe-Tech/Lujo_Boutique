@@ -2,9 +2,11 @@ package com.example.lujosboutique1;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -32,10 +34,11 @@ import okhttp3.Response;
 
 public class ProductListingActivity extends AppCompatActivity {
 
+    private static final String TAG = "ProductListingActivity";
     private TextInputEditText etProductName, etProductDescription, etProductPrice;
     private Button btnUploadImage, btnSaveListing;
 
-    // Replace with your actual API endpoint
+    //API endpoint
     private static final String CREATE_PRODUCT_URL = "https://your-api-domain.com/api/products";
     private OkHttpClient client;
     private SharedPreferences sharedPreferences;
@@ -70,9 +73,23 @@ public class ProductListingActivity extends AppCompatActivity {
                 result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         selectedImageUri = result.getData().getData();
+                        // Get the real path, which is necessary for the current OkHttp file-based upload logic
                         selectedImagePath = getRealPathFromURI(selectedImageUri);
-                        Toast.makeText(this, "Image selected", Toast.LENGTH_SHORT).show();
-                        btnUploadImage.setText("Image Selected ✓");
+
+                        // Check if path was successfully retrieved
+                        if (selectedImagePath != null) {
+                            Toast.makeText(this, "Image selected", Toast.LENGTH_SHORT).show();
+
+
+
+                            btnUploadImage.setText("Image Selected ✓");
+                        } else {
+                            Toast.makeText(this, "Could not retrieve image path. May not work on this Android version.", Toast.LENGTH_LONG).show();
+                            // Reset state if path retrieval failed
+                            selectedImageUri = null;
+                            selectedImagePath = null;
+                            btnUploadImage.setText(getString(R.string.button_upload_image)); // Assumes R.string.button_upload_image exists
+                        }
                     }
                 }
         );
@@ -100,15 +117,28 @@ public class ProductListingActivity extends AppCompatActivity {
         imagePickerLauncher.launch(intent);
     }
 
-    private String getRealPathFromURI(Uri contentUri) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-        android.database.Cursor cursor = getContentResolver().query(contentUri, projection, null, null, null);
-        if (cursor == null) return null;
 
-        int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        String path = cursor.getString(columnIndex);
-        cursor.close();
+
+
+
+    private String getRealPathFromURI(Uri contentUri) {
+        String path = null;
+        Cursor cursor = null;
+        try {
+            String[] projection = {MediaStore.Images.Media.DATA};
+            cursor = getContentResolver().query(contentUri, projection, null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                path = cursor.getString(columnIndex);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting real path from URI", e);
+            Toast.makeText(this, "Error processing image: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
         return path;
     }
 
@@ -151,10 +181,12 @@ public class ProductListingActivity extends AppCompatActivity {
             return;
         }
 
-        // Check if user is logged in
+
+
         String authToken = sharedPreferences.getString("authToken", "");
         if (authToken.isEmpty()) {
             Toast.makeText(this, "Please login first", Toast.LENGTH_SHORT).show();
+
             Intent intent = new Intent(ProductListingActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
@@ -184,7 +216,11 @@ public class ProductListingActivity extends AppCompatActivity {
                         imageFile,
                         MediaType.parse("image/*")
                 );
+                // The API expects the file to be sent with a specific key, often "image" or "file"
                 builder.addFormDataPart("image", imageFile.getName(), imageBody);
+            } else {
+                Log.w(TAG, "Selected image file does not exist at path: " + selectedImagePath);
+                // inform the user the image couldn't be found
             }
         }
 
@@ -193,6 +229,7 @@ public class ProductListingActivity extends AppCompatActivity {
         // Create request with authorization header
         Request request = new Request.Builder()
                 .url(CREATE_PRODUCT_URL)
+                // The API expects the token in the format "Bearer <token>"
                 .addHeader("Authorization", "Bearer " + token)
                 .post(requestBody)
                 .build();
@@ -201,10 +238,12 @@ public class ProductListingActivity extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                // Ensure UI updates are on the main thread
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         btnSaveListing.setEnabled(true);
+                        Log.e(TAG, "API call failed", e);
                         Toast.makeText(ProductListingActivity.this,
                                 "Network error: " + e.getMessage(),
                                 Toast.LENGTH_LONG).show();
@@ -217,6 +256,7 @@ public class ProductListingActivity extends AppCompatActivity {
                 final String responseBody = response.body().string();
                 final boolean isSuccessful = response.isSuccessful();
 
+                // Ensure UI updates are on the main thread
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -225,19 +265,21 @@ public class ProductListingActivity extends AppCompatActivity {
                         if (isSuccessful) {
                             try {
                                 JSONObject jsonResponse = new JSONObject(responseBody);
-                                String productId = jsonResponse.optString("id", "");
+
+                                String productId = jsonResponse.optString("id", "N/A");
 
                                 Toast.makeText(ProductListingActivity.this,
-                                        "Product listed successfully!",
+                                        "Product listed successfully! ID: " + productId,
                                         Toast.LENGTH_SHORT).show();
 
-                                // Clear form
+                                // Clear form for new listing
                                 clearForm();
 
-                                // Optional: Navigate back or to product list
-                                // finish();
+                                //Navigate back or to product list
+                                finish();
 
                             } catch (JSONException e) {
+                                Log.e(TAG, "Error parsing successful response", e);
                                 Toast.makeText(ProductListingActivity.this,
                                         "Product created but error parsing response",
                                         Toast.LENGTH_SHORT).show();
@@ -246,13 +288,19 @@ public class ProductListingActivity extends AppCompatActivity {
                         } else {
                             try {
                                 JSONObject errorJson = new JSONObject(responseBody);
+                                // Try to get a specific error message from the API response
                                 String errorMessage = errorJson.optString("message", "Failed to create listing");
+                                if (response.code() == 401) {
+                                    errorMessage = "Unauthorized. Please log in again.";
+                                }
+
                                 Toast.makeText(ProductListingActivity.this,
-                                        errorMessage,
+                                        errorMessage + " (Code: " + response.code() + ")",
                                         Toast.LENGTH_LONG).show();
                             } catch (JSONException e) {
+                                Log.e(TAG, "Error parsing error response", e);
                                 Toast.makeText(ProductListingActivity.this,
-                                        "Failed to create listing. Please try again.",
+                                        "Failed to create listing. Status: " + response.code(),
                                         Toast.LENGTH_LONG).show();
                             }
                         }
@@ -268,6 +316,7 @@ public class ProductListingActivity extends AppCompatActivity {
         etProductPrice.setText("");
         selectedImageUri = null;
         selectedImagePath = null;
+        //  R.string.button_upload_image is defined in strings.xml
         btnUploadImage.setText(getString(R.string.button_upload_image));
     }
 }
