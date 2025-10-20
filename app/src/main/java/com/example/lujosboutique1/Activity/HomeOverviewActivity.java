@@ -1,101 +1,83 @@
 package com.example.lujosboutique1.Activity;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
+import android.widget.SearchView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
+import androidx.viewpager2.widget.ViewPager2;
+
+import com.example.lujosboutique1.Adapter.BannerAdapter;
+import com.example.lujosboutique1.Adapter.ProductAdapter;
+import com.example.lujosboutique1.Model.Product;
+import com.example.lujosboutique1.R;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeOverviewActivity extends AppCompatActivity {
 
-    private static final String TAG = "HomeOverviewActivity";
+    private RecyclerView recyclerView;
+    private ProductAdapter productAdapter;
+    private ViewPager2 bannerPager;
     private SearchView searchView;
-    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_overview);
 
-        // 1. Initialize UI components
+        recyclerView = findViewById(R.id.recyclerView);
+        bannerPager = findViewById(R.id.bannerImage);
         searchView = findViewById(R.id.searchView);
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-        // 2. Setup SearchView Listener
-        setupSearchView();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        productAdapter = new ProductAdapter(new ArrayList<>());
+        recyclerView.setAdapter(productAdapter);
 
-        // 3. Setup Bottom Navigation Listener
-        setupBottomNavigationView();
+        SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(recyclerView);
 
-        // Note: You would typically add click listeners for the category buttons
-        // and the top row icons (chat, favorite, notifications) here.
+        loadBanners();
+        loadProducts("women"); // default
+
+        setupSearch();
     }
 
-    private void setupSearchView() {
+    private void loadBanners() {
+        new Thread(() -> {
+            List<String> banners = ApiHelper.getBanners();
+            runOnUiThread(() -> bannerPager.setAdapter(new BannerAdapter(banners)));
+        }).start();
+    }
+
+    private void loadProducts(String category) {
+        new Thread(() -> {
+            List<Product> products = ApiHelper.getProducts(category);
+            runOnUiThread(() -> productAdapter.updateData(products));
+        }).start();
+    }
+
+    private void setupSearch() {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // Handle search submission
-                Toast.makeText(HomeOverviewActivity.this, "Searching for: " + query, Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "Search submitted: " + query);
-                searchView.clearFocus();
+                loadProducts(query);
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                // Optional: Handle live text changes (e.g., filter suggestions)
                 return false;
             }
         });
     }
 
-    private void setupBottomNavigationView() {
-        // Set the default selection
-        bottomNavigationView.setSelectedItemId(R.id.nav_home);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int itemId = item.getItemId();
-
-                if (itemId == R.id.nav_home) {
-                    Toast.makeText(HomeOverviewActivity.this, "Home selected", Toast.LENGTH_SHORT).show();
-                    return true;
-                } else if (itemId == R.id.nav_search) { // Corrected ID reference
-                    Toast.makeText(HomeOverviewActivity.this, "Discover selected", Toast.LENGTH_SHORT).show();
-                    // Intent discoverIntent = new Intent(HomeOverviewActivity.this, DiscoverActivity.class);
-                    // startActivity(discoverIntent);
-                    return true;
-                } else if (itemId == R.id.nav_cart) {
-                    Toast.makeText(HomeOverviewActivity.this, "Cart selected", Toast.LENGTH_SHORT).show();
-                    return true;
-                } else if (itemId == R.id.nav_profile) {
-                    Toast.makeText(HomeOverviewActivity.this, "Profile selected", Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
-
-    public void women(View view) {
-    }
-
-    public void home(View view) {
-    }
-
-    public void beauty(View view) {
-    }
-
-    public void kids(View view) {
-    }
-
-    public void Men(View view) {
-    }
+    public void women(android.view.View v) { loadProducts("women"); }
+    public void Men(android.view.View v) { loadProducts("men"); }
+    public void kids(android.view.View v) { loadProducts("kids"); }
+    public void beauty(android.view.View v) { loadProducts("beauty"); }
+    public void home(android.view.View v) { loadProducts("home"); }
 }

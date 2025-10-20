@@ -6,135 +6,125 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/offWhite"
-    android:layout_marginHorizontal="10dp"
     tools:context=".Activity.HomeOverviewActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="10dp">
 
+        <!-- Categories -->
         <LinearLayout
             android:id="@+id/categoryMain"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/tvWomen"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:onClick="women"
                 android:padding="12dp"
                 android:text="Women"
                 android:textColor="@color/blue_green"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tvMen"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:minHeight="48dp"
+                android:layout_height="wrap_content"
                 android:onClick="Men"
                 android:padding="12dp"
-                android:text=" Men"
+                android:text="Men"
                 android:textColor="@color/blue_green"
                 android:textSize="18sp"
-                android:textStyle="bold" />
-
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tvKids"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:onClick="kids"
                 android:padding="12dp"
-                android:text=" Kids"
+                android:text="Kids"
                 android:textColor="@color/blue_green"
                 android:textSize="18sp"
-                android:textStyle="bold" />
-
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tvBeauty"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:onClick="beauty"
                 android:padding="12dp"
-                android:text=" Beauty"
+                android:text="Beauty"
                 android:textColor="@color/blue_green"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tvHome"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:onClick="home"
                 android:padding="12dp"
-                android:text=" Home"
+                android:text="Home"
                 android:textColor="@color/blue_green"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
         </LinearLayout>
 
-        <ScrollView
+        <!-- Search and Icons -->
+        <LinearLayout
+            android:id="@+id/searchRow"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
+            <SearchView
+                android:id="@+id/searchView"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/text_bg"
+                android:queryHint="Search"/>
 
-                <LinearLayout
-                    android:id="@+id/searchRow"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/categoryMain">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="Notifications"
+                android:padding="8dp"
+                android:src="@drawable/bell"/>
 
-                    <SearchView
-                        android:id="@+id/searchView"
-                        android:layout_width="0dp"
-                        android:layout_height="40sp"
-                        android:layout_weight="1"
-                        android:background="@drawable/text_bg"
-                        android:queryHint="Search" />
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="Favorites"
+                android:padding="8dp"
+                android:src="@drawable/like"/>
+        </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:contentDescription="Chat"
-                        android:padding="8dp"
-                        android:src="@drawable/bell" />
+        <!-- Banner -->
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/bannerImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="8dp"/>
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:contentDescription="Favorites"
-                        android:padding="8dp"
-                        android:src="@drawable/like" />
-
-                </LinearLayout>
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/bannerImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:scaleType="centerCrop"/>
-
-            </LinearLayout>
-        </ScrollView>
-
-
+        <!-- Products (Horizontal Scroll) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
+            android:clipToPadding="false"
+            android:scrollbars="horizontal"
+            android:overScrollMode="never"/>
     </LinearLayout>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+</androidx.constraintlayout.widget.ConstraintLayout>

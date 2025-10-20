@@ -237,7 +237,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.LENGTH_SHORT).show();
 
                                 // Navigate to HomeOverview activity
-                                Intent intent = new Intent(LoginActivity.this, HomeOverviewActivity.class);
+                                Intent intent = new Intent(LoginActivity.this,HomeOverviewActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                                 finish();
@@ -264,5 +264,8 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    public void login(View view) {
     }
 }

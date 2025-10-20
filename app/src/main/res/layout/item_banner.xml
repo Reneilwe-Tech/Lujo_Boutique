@@ -1,0 +1,13 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Activity.HomeOverviewActivity"
+    android:layout_height="200dp">
+
+    <ImageView
+        android:id="@+id/bannerImageView"
+        android:layout_width="380dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:background="@drawable/image_placeholder"/>
+</FrameLayout>
