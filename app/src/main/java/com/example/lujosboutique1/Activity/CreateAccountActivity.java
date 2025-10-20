@@ -1,4 +1,4 @@
-package com.example.lujosboutique1;
+package com.example.lujosboutique1.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.lujosboutique1.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

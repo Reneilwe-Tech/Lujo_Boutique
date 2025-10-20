@@ -1,4 +1,4 @@
-package com.example.lujosboutique1;
+package com.example.lujosboutique1.Activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +13,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.lujosboutique1.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;

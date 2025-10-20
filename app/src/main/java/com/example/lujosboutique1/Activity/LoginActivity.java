@@ -1,4 +1,4 @@
-package com.example.lujosboutique1;
+package com.example.lujosboutique1.Activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.lujosboutique1.HomeOverviewActivity;
+import com.example.lujosboutique1.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -234,7 +237,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.LENGTH_SHORT).show();
 
                                 // Navigate to HomeOverview activity
-                                Intent intent = new Intent(LoginActivity.this, activity_home_overview.class);
+                                Intent intent = new Intent(LoginActivity.this, HomeOverviewActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                                 finish();

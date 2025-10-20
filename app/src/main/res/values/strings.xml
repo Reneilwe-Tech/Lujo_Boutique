@@ -1,13 +1,17 @@
 <resources>
-    <string name="app_name">Lujo\'s boutique (1)</string>
-
-    <string name="title_new_listing">New Product Listing</string>
-    <string name="label_product_name">Product Name</string>
-    <string name="label_product_description">Product Description</string>
-    <string name="label_product_price">Product Price</string>
-    <string name="button_upload_image">Upload Product Image</string>
-    <string name="button_save_listing">Save Listing</string>
-
-    <string name="dont_have_account">Don\'t have an account? <b>Sign Up</b></string>
+    <string name="app_name">Lujo boutique (1)</string>
+    <string name="welcome_btn">Get Started</string>
+    <string name="email">Email or Phone No.</string>
+    <string name="name">Full Name</string>
+    <string name="pass">Password</string>
+    <string name="login">Already have an account? </string>
+    <string name="Google">Continue with Google</string>
+    <string name="create">Create Account</string>
+    <string name="notifications">Get notified when there is new promotions</string>
+    <string name="signup">Dont have an account yet?</string>
+    <string name="remember">Remember me</string>
+    <string name="forgot">Forgot Password</string>
+    <string name="heading2">New Deals Everyday</string>
+    <string name="heading3">New Deals Everyday</string>
 
 </resources>

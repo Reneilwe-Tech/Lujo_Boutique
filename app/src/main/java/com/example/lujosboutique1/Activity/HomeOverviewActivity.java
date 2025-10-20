@@ -1,8 +1,9 @@
-package com.example.lujosboutique1;
+package com.example.lujosboutique1.Activity;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -81,5 +82,20 @@ public class HomeOverviewActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void women(View view) {
+    }
+
+    public void home(View view) {
+    }
+
+    public void beauty(View view) {
+    }
+
+    public void kids(View view) {
+    }
+
+    public void Men(View view) {
     }
 }
