@@ -15,23 +15,21 @@
         android:theme="@style/Theme.LujosBoutique1"
         tools:targetApi="31">
         <activity
-            android:name=".activity_product_viewer"
+            android:name=".Activity.CreateAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".activity_home_overview"
+            android:name=".Activity.HomeOverviewActivity"
             android:exported="false" />
         <activity
-            android:name=".activity_product_listing"
+            android:name=".Activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateAccountActivity"
+            android:name=".Activity.ProductListingActivity"
             android:exported="true" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+        
     </application>
 
 </manifest>
