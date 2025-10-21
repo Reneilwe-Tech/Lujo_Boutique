@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         client = new OkHttpClient();
         sharedPreferences = getSharedPreferences("LujosBoutiquePrefs", MODE_PRIVATE);
 
-        // IDs defined in XML
+        // IDs defined in XML code
         editTextEmailOrPhone = findViewById(R.id.editTextPassword);
         editTextPassword = findViewById(R.id.editPassword);
         checkBoxRememberMe = findViewById(R.id.checkBoxRememberMe);

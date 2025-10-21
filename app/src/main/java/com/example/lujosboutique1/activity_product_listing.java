@@ -320,3 +320,4 @@ public class ProductListingActivity extends AppCompatActivity {
         btnUploadImage.setText(getString(R.string.button_upload_image));
     }
 }
+//
