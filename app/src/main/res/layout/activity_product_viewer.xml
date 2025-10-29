@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ProductGridActivity">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_bar"
@@ -28,12 +27,24 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tvCategoryTitle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Category"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/back_arrow"
+            app:layout_constraintEnd_toStartOf="@+id/icon_end"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <!-- Optional: Add an icon on the end for consistency -->
+        <ImageView
+            android:id="@+id/icon_end"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -41,73 +52,88 @@
 
     <View
         android:id="@+id/separator_line"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="1dp"
-        android:background="#cccccc"
-        app:layout_constraintTop_toBottomOf="@id/header_bar"/>
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/header_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <LinearLayout
         android:id="@+id/sort_filter_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/separator_line"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
+            android:id="@+id/tvSort"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
             android:text="SORT"
             android:gravity="center"
             android:textStyle="bold"
+            android:textSize="12sp"
             android:drawablePadding="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
             app:drawableStartCompat="@drawable/ic_sort"/>
 
         <View
             android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#cccccc"/>
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:background="@android:color/darker_gray"/>
 
         <TextView
+            android:id="@+id/tvFilter"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
             android:text="FILTER"
             android:gravity="center"
             android:textStyle="bold"
+            android:textSize="12sp"
             android:drawablePadding="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
             app:drawableStartCompat="@drawable/ic_filter"/>
     </LinearLayout>
 
     <View
         android:id="@+id/separator_line_2"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="1dp"
-        android:background="#cccccc"
-        app:layout_constraintTop_toBottomOf="@id/sort_filter_bar"/>
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/sort_filter_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/product_grid_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="8dp"
+        android:clipToPadding="false"
         app:layout_constraintTop_toBottomOf="@id/separator_line_2"
-        app:layout_constraintBottom_toTopOf="@id/bottom_nav"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
-        tools:listitem="@layout/item_product_card"/>
+        tools:listitem="@layout/item_product_card"
+        tools:itemCount="6"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_nav"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:menu="@menu/bottom_nav_menu"/>
+
+    <!-- Bottom Navigation -->
+    <include layout="@layout/bottom_navigation"
+    android:id="@+id/bottomNavigation"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

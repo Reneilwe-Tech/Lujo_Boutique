@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:backgroundTint="@color/muteBeige"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp"
+    app:strokeColor="@color/muteBeige"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <!-- Product Image -->
+        <ImageView
+            android:id="@+id/ivProductImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:background="@color/muteBeige"
+            app:srcCompat="@drawable/product_placeholder"
+            android:contentDescription="Product image"
+            android:layout_marginEnd="12dp" />
+
+        <!-- Product Details -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvProductName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Name"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:maxLines="2"
+                android:ellipsize="end" />
+
+            <TextView
+                android:id="@+id/tvProductSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Size: M"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="2dp" />
+
+            <TextView
+                android:id="@+id/tvProductPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="$99.99"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/blue_green"
+                android:layout_marginTop="4dp" />
+
+            <!-- Quantity Selector -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+
+                <TextView
+                    android:id="@+id/tvItemTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$99.99"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Qty:"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="8dp" />
+
+                <ImageView
+                    android:id="@+id/ivDecrease"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_remove"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:contentDescription="Decrease quantity" />
+
+                <TextView
+                    android:id="@+id/tvQuantity"
+                    android:layout_width="30dp"
+                    android:layout_height="24dp"
+                    android:text="1"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:background="@color/white"
+                    android:layout_marginHorizontal="8dp" />
+
+                <ImageView
+                    android:id="@+id/ivIncrease"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_add"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:contentDescription="Increase quantity" />
+
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Delete Button -->
+        <ImageView
+            android:id="@+id/ivDelete"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_delete"
+            android:padding="4dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:contentDescription="Remove item"
+            android:layout_gravity="top" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

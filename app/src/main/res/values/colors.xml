@@ -5,8 +5,12 @@
     <color name="charcoal">#0A0908</color>
     <color name="oliveBrown">#5E503F</color>
     <color name="offWhite">#F2F4F3</color>
-    <color name="blue_gren">#22333B</color>
+    <color name="blue_green">#22333B</color>
     <color name="muteBeige">#A9927D</color>
-    <color name="_5e503f">#5E503F</color>
+    <color name="gray">#808080</color>
+    <color name="lightGray">#C0C0C0</color>
+    <color name="darkGray">#404040</color>
+    <color name="nav_inactive">#ffffff</color>
+    <color name="nav_active">#5E503F</color>
 
 </resources>

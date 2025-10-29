@@ -1,104 +1,405 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
+    android:orientation="vertical"
     tools:context=".ProductListingActivity">
 
-    <TextView
-        android:id="@+id/tvListingTitle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/pageTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/title_new_listing"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilProductName"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/label_product_name"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@id/tvListingTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        <ImageView
+            android:id="@+id/icBack"
+            android:layout_width="30dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_back_arrow"
+            android:padding="4dp"
+            android:layout_marginStart="8dp" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etProductName"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/ser"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:inputType="textCapSentences"
-            android:minHeight="48dp"
-            android:textColor="@android:color/black"        android:textColorHint="@android:color/darker_gray" /> </com.google.android.material.textfield.TextInputLayout>
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Add Product"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilProductDescription"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/label_product_description"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/tilProductName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+    </LinearLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etProductDescription"
+    <!-- Scrollable Content Area -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="24dp"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:lines="4"
-            android:gravity="top"
-            android:minHeight="96dp"
-            android:textColor="@android:color/black"        android:textColorHint="@android:color/darker_gray" /> </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilProductPrice"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/label_product_price"
-        android:layout_marginTop="16dp"
-        app:prefixText="$"
-        app:layout_constraintTop_toBottomOf="@id/tilProductDescription"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+            <!-- Product Category -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilProductCategory"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Product Category"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etProductPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:minHeight="48dp"
-            android:textColor="@android:color/black"        android:textColorHint="@android:color/darker_gray" /> </com.google.android.material.textfield.TextInputLayout>
+                <AutoCompleteTextView
+                    android:id="@+id/actvProductCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:minHeight="48dp"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/darker_gray" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btnUploadImage"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/button_upload_image"
-        app:icon="@android:drawable/ic_menu_gallery"
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@id/tilProductPrice"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilProductName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Product Name"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/tilProductCategory"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-    <Button
-        android:id="@+id/btnSaveListing"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/button_save_listing"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etProductName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapSentences"
+                    android:minHeight="48dp"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/darker_gray" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilProductDescription"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Description"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/tilProductName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etProductDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:lines="4"
+                    android:gravity="top"
+                    android:minHeight="96dp"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/darker_gray" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilProductPrice"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Price"
+                android:layout_marginTop="16dp"
+                app:prefixText="$"
+                app:layout_constraintTop_toBottomOf="@id/tilProductDescription"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etProductPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:minHeight="48dp"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/darker_gray" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Available Sizes Section -->
+            <TextView
+                android:id="@+id/tvSizesLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Available Sizes"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintTop_toBottomOf="@id/tilProductPrice"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Clothing Sizes (initially visible) -->
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/clothingSizesGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:singleSelection="false"
+                app:layout_constraintTop_toBottomOf="@id/tvSizesLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeXS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XS"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="S"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="M"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="L"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeXL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XL"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeXXL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XXL"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+            </com.google.android.material.chip.ChipGroup>
+
+            <!-- Shoe Sizes (initially gone) -->
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/shoeSizesGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                app:singleSelection="false"
+                app:layout_constraintTop_toBottomOf="@id/tvSizesLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeUK4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UK 4"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeUK4_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UK 4.5"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeUK5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UK 5"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeUK5_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UK 5.5"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeUK6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UK 6"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeUK6_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UK 6.5"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeUK7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UK 7"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeUK7_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UK 7.5"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeUK8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UK 8"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeUK8_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UK 8.5"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeUK9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UK 9"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeUK9_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UK 9.5"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeUK10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UK 10"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeUK10_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UK 10.5"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSizeUK11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UK 11"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+            </com.google.android.material.chip.ChipGroup>
+
+            <!-- Electronics/Accessories (One Size - initially gone) -->
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/oneSizeGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                app:singleSelection="false"
+                app:layout_constraintTop_toBottomOf="@id/tvSizesLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipOneSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="One Size"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+            </com.google.android.material.chip.ChipGroup>
+
+            <!-- Stock Quantity Section -->
+            <TextView
+                android:id="@+id/tvStockLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Stock Quantity by Size"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintTop_toBottomOf="@id/clothingSizesGroup"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Stock quantity container (will be populated dynamically) -->
+            <LinearLayout
+                android:id="@+id/stockQuantityContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/tvStockLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/btnUploadImage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Upload Image"
+                android:drawableStart="@android:drawable/ic_menu_gallery"
+                android:layout_marginTop="32dp"
+                app:layout_constraintTop_toBottomOf="@id/stockQuantityContainer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/btnSaveListing"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintTop_toBottomOf="@id/btnUploadImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <!-- Fixed Bottom Navigation -->
+    <include
+        android:id="@+id/adminBottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout="@layout/admin_bottom_navigation" />
+
+</LinearLayout>

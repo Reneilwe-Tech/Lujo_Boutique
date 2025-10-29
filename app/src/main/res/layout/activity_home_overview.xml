@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeOverviewActivity">
+    tools:context=".HomeOverviewActivity"
+    android:background="@color/offWhite"
+    android:orientation="vertical">
 
     <!-- Top Horizontal Category Bar -->
     <HorizontalScrollView
         android:id="@+id/categoryScrollView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:scrollbars="none"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -24,168 +22,121 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/btnWomen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Category" />
+                android:text="Women"
+                android:textColor="@color/black"
+                android:background="@android:color/transparent"
+                android:textStyle="bold" />
 
             <Button
+                android:id="@+id/btnMen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Category" />
+                android:text="Men"
+                android:textColor="@color/black"
+                android:background="@android:color/transparent"
+                android:textStyle="bold" />
 
             <Button
+                android:id="@+id/btnKids"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Category" />
+                android:text="Kids"
+                android:textColor="@color/black"
+                android:background="@android:color/transparent"
+                android:textStyle="bold" />
 
             <Button
+                android:id="@+id/btnBeauty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Category" />
+                android:text="Beauty"
+                android:textColor="@color/black"
+                android:background="@android:color/transparent"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textColor="@color/black"
+                android:background="@android:color/transparent"
+                android:textStyle="bold" />
         </LinearLayout>
     </HorizontalScrollView>
 
-    <!-- Search Bar + Icons Row -->
-    <LinearLayout
-        android:id="@+id/searchRow"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="8dp"
-        app:layout_constraintTop_toBottomOf="@id/categoryScrollView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:queryHint="Search" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_chat"
-            android:contentDescription="Chat"
-            android:padding="8dp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_favorite"
-            android:contentDescription="Favorites"
-            android:padding="8dp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_notifications"
-            android:contentDescription="Notifications"
-            android:padding="8dp" />
-    </LinearLayout>
-
-
     <ScrollView
-        android:id="@+id/homeScrollView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/searchRow"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_weight="1"
+        android:fillViewport="true">
 
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:padding="10dp">
 
 
+    <!-- Search Bar + Icons Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/searchBar"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="Search products"
+            android:padding="8dp"
+            android:background="@drawable/search_background"
+            android:drawableStart="@drawable/ic_search" />
+
+
+        <ImageView
+            android:id="@+id/iconHeart"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_heart"
+            android:padding="4dp"
+            android:layout_marginStart="8dp" />
+
+        <ImageView
+            android:id="@+id/iconBell"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_bell"
+            android:padding="4dp"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+            <!-- Banner -->
             <ImageView
-                android:id="@+id/bannerImage"
+                android:id="@+id/banner"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/bg_placeholder"
-                android:scaleType="centerCrop" />
+                android:layout_height="150dp"
+                android:layout_marginTop="12dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/banner_placeholder" />
 
-            <!-- Category Section 1 -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Category"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:layout_marginBottom="8dp" />
-
-            <GridLayout
+            <!-- Product Sections -->
+            <LinearLayout
+                android:id="@+id/sectionsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:columnCount="2"
-                android:orientation="horizontal"
-                android:layout_marginBottom="16dp">
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/bg_placeholder" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/bg_placeholder" />
-            </GridLayout>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Category"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:layout_marginBottom="8dp" />
-
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="2"
-                android:orientation="horizontal"
-                android:layout_marginBottom="16dp">
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/bg_placeholder" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/bg_placeholder" />
-            </GridLayout>
+                android:orientation="vertical"
+                android:layout_marginTop="10dp" />
         </LinearLayout>
     </ScrollView>
 
+    <!-- Bottom Navigation -->
+    <include layout="@layout/bottom_navigation" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
-        app:menu="@menu/bottom_nav_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+</LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
