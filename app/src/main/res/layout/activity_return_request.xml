@@ -5,53 +5,93 @@
     android:padding="16dp">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Request a Return"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Order Selection Section -->
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="Select Order"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
 
-    <EditText
-        android:id="@+id/etOrderId"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerOrders"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Order ID"/>
+        android:layout_marginBottom="16dp" />
 
-    <EditText
-        android:id="@+id/etProductId"
+    <!-- Product Selection Section (initially hidden) -->
+    <TextView
+        android:id="@+id/tvSelectProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Product to Return"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerProducts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Product ID"/>
+        android:layout_marginBottom="16dp"
+        android:visibility="gone" />
+
+    <!-- Return Reason Section (initially hidden) -->
+    <TextView
+        android:id="@+id/tvReturnReason"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reason for Return"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/etReason"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Reason for return"/>
+        android:layout_height="120dp"
+        android:hint="Please explain why you want to return this product..."
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btnSubmitReturn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit Return"/>
+        android:text="Submit Return Request"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#CCC"
-        android:layout_marginVertical="10dp"/>
+        android:layout_marginVertical="20dp" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="My Return Requests"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_marginBottom="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_marginBottom="8dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerReturns"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <include layout="@layout/bottom_navigation" />
 </LinearLayout>

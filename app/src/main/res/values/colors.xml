@@ -6,11 +6,22 @@
     <color name="oliveBrown">#5E503F</color>
     <color name="offWhite">#F2F4F3</color>
     <color name="blue_green">#22333B</color>
-    <color name="muteBeige">#A9927D</color>
+    <color name="muteBeige">#D8A9927D</color>
     <color name="gray">#808080</color>
     <color name="lightGray">#C0C0C0</color>
     <color name="darkGray">#404040</color>
     <color name="nav_inactive">#ffffff</color>
     <color name="nav_active">#5E503F</color>
+    <color name="blue_green_dark">#1a756e</color>
+    <color name="light_off_white">#f8f9fa</color>
+    <color name="primary">#2196F3</color>
+    <color name="primary_dark">#1976D2</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="gray_light">#BDBDBD</color>
+    <color name="divider">#E0E0E0</color>
+    <color name="star_color">#FFD700</color>
+
 
 </resources>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="12dp"
+    android:background="@color/lightGray">
+
+    <TextView
+        android:id="@+id/tvSizeLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Size M"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quantity:"
+        android:textSize="14sp"
+        android:textColor="@color/gray"
+        android:layout_marginEnd="8dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/quantity_selector_bg"
+        android:gravity="center_vertical">
+
+        <Button
+            android:id="@+id/btnDecrease"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text="-"
+            android:textSize="16sp"
+            android:background="@android:color/transparent"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tvQuantity"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="0"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/btnIncrease"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text="+"
+            android:textSize="16sp"
+            android:background="@android:color/transparent"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+</LinearLayout>

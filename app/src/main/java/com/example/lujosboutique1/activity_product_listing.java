@@ -88,7 +88,7 @@ public class ProductListingActivity extends AppCompatActivity {
                             // Reset state if path retrieval failed
                             selectedImageUri = null;
                             selectedImagePath = null;
-                            btnUploadImage.setText(getString(R.string.button_upload_image)); // Assumes R.string.button_upload_image exists
+                            btnUploadImage.setText(getString(R.string.upload_image)); // Assumes R.string.button_upload_image exists
                         }
                     }
                 }

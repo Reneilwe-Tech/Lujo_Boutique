@@ -1,34 +1,300 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="12dp"
     android:background="@color/offWhite"
+    android:orientation="vertical"
     tools:context=".AdminProductsActivity">
 
-    <TextView
-        android:id="@+id/tvTitle"
+    <!-- Header with Solid Background -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Admin - Product List"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:padding="8dp" />
+        android:orientation="vertical"
+        android:background="@drawable/header_gradient"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="20dp"
+        android:elevation="4dp">
 
-    <Button
-        android:id="@+id/btnAddProduct"
-        android:layout_width="match_parent"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Product Management"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tvProductsCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0 products"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_marginTop="4dp" />
+
+    </LinearLayout>
+
+    <!-- Floating Action Button for Add Product -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddProduct"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Product"
-        android:backgroundTint="@color/blue_green"
-        android:layout_marginBottom="10dp" />
+        android:layout_gravity="end|bottom"
+        android:layout_margin="24dp"
+        android:src="@drawable/ic_add"
+        app:backgroundTint="@color/blue_green"
+        app:tint="@color/white"
+        android:elevation="8dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerProducts"
+    <!-- Main Content Area -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="4dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Search Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_search"
+                    app:tint="@color/gray" />
+
+                <EditText
+                    android:id="@+id/etSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:background="@null"
+                    android:hint="Search products..."
+                    android:textSize="14dp"
+                    android:padding="8px" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Categories Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Categories"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/categoryContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <!-- All Categories Chip -->
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipAll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="All"
+                            android:checked="true"
+                            app:chipBackgroundColor="@color/blue_green"
+                            app:chipStrokeColor="@color/blue_green"
+                            android:textColor="@color/white"
+                            android:layout_marginEnd="8dp" />
+
+                        <!-- Category Chips -->
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipWomen"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Women"
+                            app:chipBackgroundColor="@color/white"
+                            app:chipStrokeColor="@color/blue_green"
+                            app:chipStrokeWidth="1dp"
+                            android:textColor="@color/black"
+                            android:layout_marginEnd="8dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipMen"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Men"
+                            app:chipBackgroundColor="@color/white"
+                            app:chipStrokeColor="@color/blue_green"
+                            app:chipStrokeWidth="1dp"
+                            android:textColor="@color/black"
+                            android:layout_marginEnd="8dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipKids"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kids"
+                            app:chipBackgroundColor="@color/white"
+                            app:chipStrokeColor="@color/blue_green"
+                            app:chipStrokeWidth="1dp"
+                            android:textColor="@color/black"
+                            android:layout_marginEnd="8dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipBeauty"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Beauty"
+                            app:chipBackgroundColor="@color/white"
+                            app:chipStrokeColor="@color/blue_green"
+                            app:chipStrokeWidth="1dp"
+                            android:textColor="@color/black"
+                            android:layout_marginEnd="8dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipHome"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Home"
+                            app:chipBackgroundColor="@color/white"
+                            app:chipStrokeColor="@color/blue_green"
+                            app:chipStrokeWidth="1dp"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Products List Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- Products Header -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16px"
+                    android:background="@color/lightGray">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Products"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvShowingCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Showing 0"
+                        android:textColor="@color/gray"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <!-- Products RecyclerView -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerProducts"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:padding="8dp" />
+
+                <!-- Empty State -->
+                <LinearLayout
+                    android:id="@+id/emptyState"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:padding="40dp">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_empty_box"
+                        android:layout_marginBottom="16dp"
+                        app:tint="@color/gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="No products found"
+                        android:textColor="@color/gray"
+                        android:textSize="16sp"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Add a product to get started"
+                        android:textColor="@color/lightGray"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        android:layout_marginTop="8dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+ <include layout="@layout/admin_bottom_navigation"/>
 </LinearLayout>

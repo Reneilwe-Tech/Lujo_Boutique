@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    android
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_bar"
@@ -117,12 +118,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/product_grid_recycler_view"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:padding="8dp"
         android:clipToPadding="false"
         app:layout_constraintTop_toBottomOf="@id/separator_line_2"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/item_product_card"
@@ -131,7 +132,7 @@
 
     <!-- Bottom Navigation -->
     <include layout="@layout/bottom_navigation"
-    android:id="@+id/bottomNavigation"
+    android:id="@+id/bottom_nav"
     android:layout_width="match_parent"
     android:layout_height="60dp"
     app:layout_constraintBottom_toBottomOf="parent"/>

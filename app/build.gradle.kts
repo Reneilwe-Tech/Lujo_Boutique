@@ -38,11 +38,15 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    //Added dependencies
+
+    // Fixed dependencies - remove duplicates
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation(libs.constraintlayout)
-    implementation(libs.activity)
-    implementation(libs.constraintlayout)
-    implementation ("com.squareup.okhttp3:okhttp:4.11.0")
+
+    // External dependencies
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
+    // Fixed MPAndroidChart dependency
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/size_card"
+    android:layout_width="60dp"
+    android:layout_height="40dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="8dp"
+    app:strokeColor="@color/lightGray"
+    app:strokeWidth="1dp"
+    app:cardBackgroundColor="@color/white">
+
+    <TextView
+        android:id="@+id/size_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="M"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/black" />
+
+</com.google.android.material.card.MaterialCardView>
