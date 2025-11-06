@@ -45,4 +45,6 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation ("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation("com.google.android.material:material:1.8.0")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 }

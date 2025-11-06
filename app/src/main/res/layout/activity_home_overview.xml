@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeOverviewActivity"
     android:background="@color/offWhite"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".HomeOverviewActivity">
 
     <!-- Top Horizontal Category Bar -->
     <HorizontalScrollView
@@ -25,45 +25,45 @@
                 android:id="@+id/btnWomen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
                 android:text="Women"
                 android:textColor="@color/black"
-                android:background="@android:color/transparent"
                 android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnMen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
                 android:text="Men"
                 android:textColor="@color/black"
-                android:background="@android:color/transparent"
                 android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnKids"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
                 android:text="Kids"
                 android:textColor="@color/black"
-                android:background="@android:color/transparent"
                 android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnBeauty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
                 android:text="Beauty"
                 android:textColor="@color/black"
-                android:background="@android:color/transparent"
                 android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnHome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
                 android:text="Home"
                 android:textColor="@color/black"
-                android:background="@android:color/transparent"
                 android:textStyle="bold" />
         </LinearLayout>
     </HorizontalScrollView>
@@ -75,46 +75,45 @@
         android:fillViewport="true">
 
         <LinearLayout
-            android:orientation="vertical"
+            android:id="@+id/sectionsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:padding="10dp">
 
+            <!-- Search Bar + Icons Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-    <!-- Search Bar + Icons Row -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+                <EditText
+                    android:id="@+id/searchBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_background"
+                    android:drawableStart="@drawable/ic_search"
+                    android:hint="Search products"
+                    android:padding="8dp" />
 
-        <EditText
-            android:id="@+id/searchBar"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:hint="Search products"
-            android:padding="8dp"
-            android:background="@drawable/search_background"
-            android:drawableStart="@drawable/ic_search" />
+                <ImageView
+                    android:id="@+id/iconHeart"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_heart" />
 
-
-        <ImageView
-            android:id="@+id/iconHeart"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/ic_heart"
-            android:padding="4dp"
-            android:layout_marginStart="8dp" />
-
-        <ImageView
-            android:id="@+id/iconBell"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/ic_bell"
-            android:padding="4dp"
-            android:layout_marginStart="8dp" />
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/iconBell"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_bell" />
+            </LinearLayout>
 
             <!-- Banner -->
             <ImageView
@@ -125,13 +124,175 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/banner_placeholder" />
 
-            <!-- Product Sections -->
+            <!-- Fixed Sections -->
+            <!-- Featured Products Section -->
             <LinearLayout
-                android:id="@+id/sectionsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Featured Products"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="See All"
+                        android:textSize="14sp"
+                        android:textColor="@color/blue_green" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/featuredProductsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:paddingBottom="16dp"
+                    tools:listitem="@layout/item_product_card" />
+
+            </LinearLayout>
+
+            <!-- New Arrivals Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="New Arrivals"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="See All"
+                        android:textSize="14sp"
+                        android:textColor="@color/blue_green" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/newArrivalsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:paddingBottom="16dp"
+                    tools:listitem="@layout/item_product_card" />
+
+            </LinearLayout>
+
+            <!-- Best Sellers Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Best Sellers"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="See All"
+                        android:textSize="14sp"
+                        android:textColor="@color/blue_green" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bestSellersRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:paddingBottom="16dp"
+                    tools:listitem="@layout/item_product_card" />
+
+            </LinearLayout>
+
+            <!-- Sale Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Trending Products"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="See All"
+                        android:textSize="14sp"
+                        android:textColor="@color/blue_green" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/saleProductsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:paddingBottom="16dp"
+                    tools:listitem="@layout/item_product_card" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
@@ -139,4 +300,3 @@
     <include layout="@layout/bottom_navigation" />
 
 </LinearLayout>
-
