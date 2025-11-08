@@ -21,7 +21,56 @@
     <color name="text_secondary">#757575</color>
     <color name="gray_light">#BDBDBD</color>
     <color name="divider">#E0E0E0</color>
-    <color name="star_color">#FFD700</color>
+    <color name="star_color">#FFC107</color>
+    <color name="green">#009688</color>
+    <color name="red">#F44336</color>
+    <color name="blue">#007BFF</color>
+
+    <!-- Status Colors (using your theme palette) -->
+    <color name="pending">#FFA000</color> <!-- Amber -->
+    <color name="pendingLight">#FFF8E1</color>
+
+    <color name="processing">@color/blue_green</color> <!-- Using your blue_green -->
+    <color name="processingLight">#E0F2F1</color>
+
+    <color name="shipped">#5C6BC0</color> <!-- Indigo -->
+    <color name="shippedLight">#E8EAF6</color>
+
+    <color name="delivered">#43A047</color> <!-- Green -->
+    <color name="deliveredLight">#E8F5E8</color>
+
+    <color name="cancelled">#E53935</color> <!-- Red -->
+    <color name="cancelledLight">#FFEBEE</color>
+
+    <!-- State Colors -->
+    <color name="pressedState">#E8EAE8</color>
+    <color name="selectedState">#E8F2F2</color>
+
+    <!-- Text Colors -->
+    <color name="textPrimary">#212529</color>
+    <color name="textSecondary">#6C757D</color>
+    <color name="textLight">#FFFFFF</color>
+    <color name="textOnPrimary">@color/white</color>
+    <color name="textOnSecondary">@color/black</color>
+
+    <!-- Derived Colors -->
+    <color name="primaryColor">@color/oliveBrown</color>
+    <color name="primaryDark">#6B6C3A</color>
+    <color name="primaryLight">#A5A66A</color>
+
+    <color name="secondaryColor">@color/charcoal</color>
+    <color name="secondaryDark">#2C3840</color>
+    <color name="secondaryLight">#5A6B7A</color>
+
+    <color name="accentColor">@color/blue_green</color>
+    <color name="accentDark">#3A6B6C</color>
+    <color name="accentLight">#6AAAAA</color>
+
+    <!-- Neutral Colors -->
+
+    <color name="borderColor">#DEE2E6</color>
+
+
 
 
 </resources>

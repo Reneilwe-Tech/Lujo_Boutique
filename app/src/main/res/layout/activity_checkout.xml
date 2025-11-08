@@ -117,7 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:orientation="horizontal"
-                android:background="@drawable/search_bar_bg"
+                android:background="@drawable/search_background"
                 android:gravity="center_vertical"
                 android:paddingHorizontal="12dp">
 
@@ -134,7 +134,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/ic_google_logo" />
+                    android:src="@drawable/google" />
             </LinearLayout>
 
             <!-- Order summary -->
@@ -170,47 +170,60 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:weightSum="1"
                 android:paddingTop="16dp">
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Cart total"
-                    android:textSize="14sp"
-                    android:gravity="end"/>
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="309dp"
+                        android:layout_height="wrap_content"
+                        android:text="Cart total"
+                        android:textSize="14sp" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/cart_total"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="R 4550"
                     android:textSize="14sp"
-                    android:gravity="end"
                     android:textColor="@color/darkGray"/>
 
-                <TextView
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Delivery Fee"
-                    android:textSize="14sp"
-                    android:gravity="end"
-                    android:paddingTop="4dp"/>
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="309dp"
+                        android:layout_height="wrap_content"
+                        android:text="Delivery Fee"
+                        android:textSize="14sp" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="R 150"
                     android:textSize="14sp"
-                    android:gravity="end"
                     android:textColor="@color/darkGray"/>
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Order total"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:gravity="end"
-                    android:paddingTop="4dp"/>
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="309dp"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="4dp"
+                        android:text="Order total"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/total_price"
@@ -218,8 +231,8 @@
                     android:layout_height="wrap_content"
                     android:text="R 4470"
                     android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:gravity="end"/>
+                    android:textSize="16sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <!-- Payment Method -->
@@ -233,6 +246,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_weight="1"
                 android:src="@drawable/ic_arrow_right"
                 android:scaleType="centerInside"
                 android:contentDescription="Select Payment Method"/>
@@ -245,27 +259,40 @@
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:weightSum="1"
         android:background="@color/charcoal"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:paddingHorizontal="16dp"
-        android:gravity="center_vertical|space_between">
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
         <TextView
             android:id="@+id/totalText"
-            android:layout_width="wrap_content"
+            android:layout_width="259dp"
             android:layout_height="wrap_content"
-            android:text="R4 470.00\nYour order (4 items)"
+            android:text="R4 470.00"
             android:textColor="@android:color/white"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/totalItems"
+            android:layout_width="259dp"
+            android:layout_height="wrap_content"
+            android:text="Total of (4) items"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/btnCheckout"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:text="Place Order"
             android:textColor="@android:color/white"
-            android:backgroundTint="@color/brown"
             app:cornerRadius="24dp"
             android:textAllCaps="false"/>
     </LinearLayout>

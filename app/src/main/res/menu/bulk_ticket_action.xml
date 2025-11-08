@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_bulk_assign"
+        android:title="Assign to Agent" />
+    <item
+        android:id="@+id/menu_bulk_close"
+        android:title="Mark as Resolved" />
+    <item
+        android:id="@+id/menu_bulk_priority"
+        android:title="Change Priority" />
+    <item
+        android:id="@+id/menu_bulk_delete"
+        android:title="Delete Tickets" />
+</menu>

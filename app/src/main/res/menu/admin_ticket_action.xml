@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_auto_assign"
+        android:title="Auto-assign Tickets" />
+    <item
+        android:id="@+id/menu_export_reports"
+        android:title="Export Reports" />
+    <item
+        android:id="@+id/menu_settings"
+        android:title="Support Settings" />
+</menu>

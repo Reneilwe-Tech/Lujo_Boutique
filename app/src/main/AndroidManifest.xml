@@ -15,6 +15,27 @@
         android:theme="@style/Theme.LujosBoutique1"
         tools:targetApi="31">
         <activity
+            android:name=".CategoriesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminCategoriesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminHelpCenterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReportsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomersActivity"
+            android:exported="false" />
+        <activity
             android:name=".AnalyticsActivity"
             android:exported="false" />
         <activity
@@ -39,13 +60,13 @@
             android:name=".OrderHistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".activity_product_viewer"
+            android:name=".ProductViewerActivity"
             android:exported="false" />
         <activity
-            android:name=".activity_home_overview"
+            android:name=".HomeOverviewActivity"
             android:exported="false" />
         <activity
-            android:name=".activity_product_listing"
+            android:name=".ProductListingActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
