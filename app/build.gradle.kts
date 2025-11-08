@@ -32,21 +32,27 @@ android {
 }
 
 dependencies {
-
+    // AndroidX Core
     implementation(libs.appcompat)
     implementation(libs.material)
+    implementation(libs.activity)
+    implementation(libs.constraintlayout)
+
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
-    // Fixed dependencies - remove duplicates
-    implementation(libs.activity)
-    implementation(libs.constraintlayout)
-
-    // External dependencies
+    // Third-party
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
-    implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation(libs.glide)
+    implementation(libs.gson)
+    implementation(libs.mpandroidchart)
+    // Navigation
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
 
-    // Fixed MPAndroidChart dependency
-    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    // Lifecycle
+    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.lifecycle.livedata)
 }
